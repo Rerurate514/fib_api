@@ -1,4 +1,4 @@
-package main
+package fibonacci_rest_api
 
 import (
 	"fmt"
