@@ -33,10 +33,11 @@ func (f *Fibonacci) GetNumberAt(index int) (int64, error) {
 	return f.list[index], nil
 }
 
+func (f *Fibonacci) GetFullList() []int64 {
+	return append([]int64{}, f.list...)
+}
+
 // IF NEEDED
-// func (f *Fibonacci) GetFullList() []int64 {
-// 	return append([]int64{}, f.list...)
-// }
 // func (f *Fibonacci) Size() int {
 // 	return len(f.list)
 // }
