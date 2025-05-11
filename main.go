@@ -1,17 +1,14 @@
 package main
 
 import (
-	"net/http"
-
+	fibonacci_rest_api "example.com/mod/lib/features/fibonacci_rest_api/rest"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
+
+	r.GET("/fib/:index", fibonacci_rest_api.GetNumberAt)
+
 	r.Run()
 }
