@@ -16,4 +16,4 @@ jobs:
       - name: Go UT
         uses: ./.github/actions/go-ut
         with:
-          go-directory: ./test
+          go-directory: test
