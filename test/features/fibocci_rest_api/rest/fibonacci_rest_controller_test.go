@@ -60,7 +60,7 @@ func TestGetNumberAt_InvalidIndex_Negative(t *testing.T) {
 	err := json.Unmarshal(w.Body.Bytes(), &response)
 	assert.NoError(t, err)
 
-	assert.Contains(t, response["message"], "無効")
+	assert.Contains(t, response["message"], "インデックス -1 は範囲外です（0-255）")
 }
 
 func TestGetNumberAt_NonNumericIndex(t *testing.T) {
