@@ -1,0 +1,41 @@
+name: Go UT
+description: Run go unit test
+
+inputs:
+  go-directory:
+    required: true
+  result-file:
+    required: false
+    default: result.txt
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        check-latest: true
+        cache-dependency-path: |
+            ./go.sum
+
+    - name: Build
+      shell: bash
+      run: go build -v ./...
+      working-directory: ${{ inputs.go-directory }}
+
+    - name: Test
+      shell: bash
+      run: go test -cover ./... > ${{ inputs.result-file }}
+      working-directory: ${{ inputs.go-directory }}
+
+    - name: Summary
+      shell: bash
+      run: |
+        echo "### UT summary" >> $GITHUB_STEP_SUMMARY
+        while read LINE; do
+          echo $LINE >> $GITHUB_STEP_SUMMARY
+        done < ${{ inputs.result-file }}
+      working-directory: ${{ inputs.go-directory }}
