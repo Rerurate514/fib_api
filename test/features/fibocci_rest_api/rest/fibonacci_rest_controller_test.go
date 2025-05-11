@@ -24,14 +24,14 @@ func (m *MockFibonacci) GetNumberAt(index int) (uint64, error) {
 func setupRouter() *gin.Engine {
 	gin.SetMode(gin.TestMode)
 	r := gin.Default()
-	r.GET("/fibonacci/:index", fibonacci_rest_api.GetNumberAt)
+	r.GET("/fib/:index", fibonacci_rest_api.GetNumberAt)
 	return r
 }
 
 func TestGetNumberAt_ValidIndex(t *testing.T) {
 	router := setupRouter()
 
-	req, _ := http.NewRequest("GET", "/fibonacci/10", nil)
+	req, _ := http.NewRequest("GET", "/fib/10", nil)
 	w := httptest.NewRecorder()
 
 	//send request
@@ -49,7 +49,7 @@ func TestGetNumberAt_ValidIndex(t *testing.T) {
 func TestGetNumberAt_InvalidIndex_Negative(t *testing.T) {
 	router := setupRouter()
 
-	req, _ := http.NewRequest("GET", "/fibonacci/-1", nil)
+	req, _ := http.NewRequest("GET", "/fib/-1", nil)
 	w := httptest.NewRecorder()
 
 	router.ServeHTTP(w, req)
@@ -66,7 +66,7 @@ func TestGetNumberAt_InvalidIndex_Negative(t *testing.T) {
 func TestGetNumberAt_NonNumericIndex(t *testing.T) {
 	router := setupRouter()
 
-	req, _ := http.NewRequest("GET", "/fibonacci/abc", nil)
+	req, _ := http.NewRequest("GET", "/fib/abc", nil)
 	w := httptest.NewRecorder()
 
 	router.ServeHTTP(w, req)
@@ -83,7 +83,7 @@ func TestGetNumberAt_NonNumericIndex(t *testing.T) {
 func TestGetNumberAt_LargeIndex(t *testing.T) {
 	router := setupRouter()
 
-	req, _ := http.NewRequest("GET", "/fibonacci/100", nil)
+	req, _ := http.NewRequest("GET", "/fib/100", nil)
 	w := httptest.NewRecorder()
 
 	router.ServeHTTP(w, req)
