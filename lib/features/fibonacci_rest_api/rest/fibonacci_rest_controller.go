@@ -13,7 +13,9 @@ func GetNumberAt(c *gin.Context) {
 	index, err := strconv.Atoi(indexStr)
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "無効なインデックスです"})
+		c.JSON(
+			http.StatusBadRequest,
+			gin.H{"message": "無効なインデックスです", "status": http.StatusBadRequest})
 		return
 	}
 
@@ -22,9 +24,12 @@ func GetNumberAt(c *gin.Context) {
 	value, err := fib.GetNumberAt(index)
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(
+			http.StatusBadRequest,
+			gin.H{"message": err.Error(), "status": http.StatusBadRequest},
+		)
 		return
 	}
 
-	c.IndentedJSON(http.StatusOK, gin.H{"value": value})
+	c.IndentedJSON(http.StatusOK, gin.H{"result": value})
 }
