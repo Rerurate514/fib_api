@@ -33,11 +33,11 @@ func TestFibonacciSpecificValues(t *testing.T) {
 
 	val10, err := fib.GetNumberAt(10)
 	assert.Nil(t, err)
-	assert.Equal(t, int64(89), val10)
+	assert.Equal(t, int64(55), val10)
 
 	val20, err := fib.GetNumberAt(20)
 	assert.Nil(t, err)
-	assert.Equal(t, int64(10946), val20)
+	assert.Equal(t, int64(6765), val20)
 
 	_, err = fib.GetNumberAt(-1)
 	assert.NotNil(t, err)

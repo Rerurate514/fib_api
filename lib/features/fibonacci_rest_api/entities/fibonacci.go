@@ -30,6 +30,9 @@ func (f *Fibonacci) GetNumberAt(index int) (int64, error) {
 	if index < 0 || index >= len(f.list) {
 		return 0, fmt.Errorf("インデックス %d は範囲外です（0-%d）", index, len(f.list)-1)
 	}
+
+	index--
+
 	return f.list[index], nil
 }
 
