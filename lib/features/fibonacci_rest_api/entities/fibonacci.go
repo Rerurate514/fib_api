@@ -17,7 +17,7 @@ func NewFibonacci() *Fibonacci {
 func createFibonacciArray() []int64 {
 	result := make([]int64, 256)
 
-	result[0], result[1] = 0, 1
+	result[0], result[1] = 1, 1
 
 	for i := 2; i < len(result); i++ {
 		result[i] = result[i-2] + result[i-1]
