@@ -9,7 +9,7 @@ import (
 )
 
 func GetNumberAt(c *gin.Context) {
-	indexStr := c.Param("index")
+	indexStr := c.Query("n")
 	index, err := strconv.Atoi(indexStr)
 
 	if err != nil {

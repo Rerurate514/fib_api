@@ -8,7 +8,7 @@ import (
 func main() {
 	r := gin.Default()
 
-	r.GET("/fib/:index", fibonacci_rest_api.GetNumberAt)
+	r.GET("/fib", fibonacci_rest_api.GetNumberAt)
 
 	r.Run()
 }
