@@ -8,15 +8,14 @@
 - 使用したデプロイ環境 : [render.com](https://render.com/)
 - サーバーエンドポイントURL : https://fib-api-yn1x.onrender.com ※最初のリクエストからサーバーが起動するまで1~2分掛かります。 2回目以降は時間はあまり掛かりません。
   - 正常系
-    - [フィボナッチ数 1](https://fib-api-yn1x.onrender.com/fib/1)
-    - [フィボナッチ数 50](https://fib-api-yn1x.onrender.com/fib/50)
-    - [フィボナッチ数 100](https://fib-api-yn1x.onrender.com/fib/100)
-    - [フィボナッチ数 150](https://fib-api-yn1x.onrender.com/fib/150)
-  
-  - 異常
-    - [フィボナッチ数 -1](https://fib-api-yn1x.onrender.com/fib/-1)
-    - [不正な入力: 文字列](https://fib-api-yn1x.onrender.com/fib/helloworld)
-    - [範囲外の値: 9999](https://fib-api-yn1x.onrender.com/fib/9999)
+    - [フィボナッチ数 1](https://fib-api-yn1x.onrender.com/fib?n=1)
+    - [フィボナッチ数 50](https://fib-api-yn1x.onrender.com/fib?n=50)
+    - [フィボナッチ数 100](https://fib-api-yn1x.onrender.com/fib?n=100)
+    - [フィボナッチ数 150](https://fib-api-yn1x.onrender.com/fib?n=150)
+  - 異常系
+    - [フィボナッチ数 -1](https://fib-api-yn1x.onrender.com/fib?n=-1)
+    - [不正な入力: 文字列](https://fib-api-yn1x.onrender.com/fib?n=helloworld)
+    - [範囲外の値: 9999](https://fib-api-yn1x.onrender.com/fib?n=9999)
    
 ## フォルダ構成
 ```
