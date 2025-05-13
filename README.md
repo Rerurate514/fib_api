@@ -13,8 +13,7 @@
     - [フィボナッチ数 100](https://fib-api-yn1x.onrender.com/fib/100)
     - [フィボナッチ数 150](https://fib-api-yn1x.onrender.com/fib/150)
   
-  - 異常系
-    - [フィボナッチ数 0](https://fib-api-yn1x.onrender.com/fib/0)
+  - 異常
     - [フィボナッチ数 -1](https://fib-api-yn1x.onrender.com/fib/-1)
     - [不正な入力: 文字列](https://fib-api-yn1x.onrender.com/fib/helloworld)
     - [範囲外の値: 9999](https://fib-api-yn1x.onrender.com/fib/9999)
