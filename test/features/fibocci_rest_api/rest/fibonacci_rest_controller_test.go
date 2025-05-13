@@ -97,3 +97,20 @@ func TestGetNumberAt_LargeIndex(t *testing.T) {
 		assert.Equal(t, http.StatusBadRequest, w.Code)
 	}
 }
+
+func TestGetNumberAt_MissingQueryParam(t *testing.T) {
+	router := setupRouter()
+
+	req, _ := http.NewRequest("GET", "/fib", nil)
+	w := httptest.NewRecorder()
+
+	router.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusBadRequest, w.Code)
+
+	var response map[string]interface{}
+	err := json.Unmarshal(w.Body.Bytes(), &response)
+	assert.NoError(t, err)
+
+	assert.Equal(t, "クエリパラメータが指定されていません", response["message"])
+}

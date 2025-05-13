@@ -10,6 +10,14 @@ import (
 
 func GetNumberAt(c *gin.Context) {
 	indexStr := c.Query("n")
+
+	if indexStr == "" {
+		c.JSON(
+			http.StatusBadRequest,
+			gin.H{"message": "クエリパラメータが指定されていません", "status": http.StatusBadRequest})
+		return
+	}
+
 	index, err := strconv.Atoi(indexStr)
 
 	if err != nil {
