@@ -24,14 +24,14 @@ func (m *MockFibonacci) GetNumberAt(index int) (uint64, error) {
 func setupRouter() *gin.Engine {
 	gin.SetMode(gin.TestMode)
 	r := gin.Default()
-	r.GET("/fib/:index", fibonacci_rest_api.GetNumberAt)
+	r.GET("/fib", fibonacci_rest_api.GetNumberAt)
 	return r
 }
 
 func TestGetNumberAt_ValidIndex(t *testing.T) {
 	router := setupRouter()
 
-	req, _ := http.NewRequest("GET", "/fib/10", nil)
+	req, _ := http.NewRequest("GET", "/fib?n=10", nil)
 	w := httptest.NewRecorder()
 
 	//send request
@@ -49,7 +49,7 @@ func TestGetNumberAt_ValidIndex(t *testing.T) {
 func TestGetNumberAt_InvalidIndex_Negative(t *testing.T) {
 	router := setupRouter()
 
-	req, _ := http.NewRequest("GET", "/fib/-1", nil)
+	req, _ := http.NewRequest("GET", "/fib?n=-1", nil)
 	w := httptest.NewRecorder()
 
 	router.ServeHTTP(w, req)
@@ -66,7 +66,7 @@ func TestGetNumberAt_InvalidIndex_Negative(t *testing.T) {
 func TestGetNumberAt_NonNumericIndex(t *testing.T) {
 	router := setupRouter()
 
-	req, _ := http.NewRequest("GET", "/fib/abc", nil)
+	req, _ := http.NewRequest("GET", "/fib?n=abc", nil)
 	w := httptest.NewRecorder()
 
 	router.ServeHTTP(w, req)
@@ -83,7 +83,7 @@ func TestGetNumberAt_NonNumericIndex(t *testing.T) {
 func TestGetNumberAt_LargeIndex(t *testing.T) {
 	router := setupRouter()
 
-	req, _ := http.NewRequest("GET", "/fib/100", nil)
+	req, _ := http.NewRequest("GET", "/fib?n=100", nil)
 	w := httptest.NewRecorder()
 
 	router.ServeHTTP(w, req)
@@ -96,4 +96,21 @@ func TestGetNumberAt_LargeIndex(t *testing.T) {
 	} else {
 		assert.Equal(t, http.StatusBadRequest, w.Code)
 	}
+}
+
+func TestGetNumberAt_MissingQueryParam(t *testing.T) {
+	router := setupRouter()
+
+	req, _ := http.NewRequest("GET", "/fib", nil)
+	w := httptest.NewRecorder()
+
+	router.ServeHTTP(w, req)
+
+	assert.Equal(t, http.StatusBadRequest, w.Code)
+
+	var response map[string]interface{}
+	err := json.Unmarshal(w.Body.Bytes(), &response)
+	assert.NoError(t, err)
+
+	assert.Equal(t, "クエリパラメータが指定されていません", response["message"])
 }
